@@ -36,7 +36,7 @@ Manual editing takes **30+ minutes**. AI tools like Descript cost **$24/month**.
 ## ✨ How It Works
 
 <p align="center">
-  <img src="assets/workflow.png" width="700" alt="Workflow" />
+  <img src="assets/workflow_v2.png" width="700" alt="Workflow" />
 </p>
 
 ```
