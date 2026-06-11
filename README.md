@@ -1,45 +1,29 @@
 # ⚡ RapidEdit
 
-AI-powered video editor — removes silence, pauses, and filler sounds for tight, clean cuts.
+Remove silence, pauses, and filler sounds from videos. Fast, clean, tight cuts.
 
 ---
 
-## What it does
+## Tight Cut (keep intervals)
 
-- Removes silence, dead air, long pauses
-- Removes filler sounds ("umm", "uhh", "hmm")
-- Keeps natural speech flow
-- Uses FFmpeg with GPU acceleration (macOS VideoToolbox)
-- Batch processing for large videos (auto-splits into segments)
+```bash
+python3 rapid_edit.py -path input.mp4 -out clean.mp4 -config intervals.json
+```
+
+`intervals.json`:
+```json
+{
+  "intervals": [[0.73, 2.81], [3.19, 4.48], [5.62, 6.27]]
+}
+```
 
 ---
 
-## Usage
-
-### Single video
+## Split Video (10 sec segments)
 
 ```bash
-python3 remove_silence.py input.mp4 output.mp4
-```
-
-### With custom intervals
-
-```bash
-python3 apply_keep_intervals_to_video.py
-```
-
-Edit the `intervals` list inside the script with your keep timestamps.
-
-### Split into tight segments
-
-```bash
-python3 split_tight.py input.mp4 output.mp4
-```
-
-### Simple cut
-
-```bash
-python3 cut_video.py input.mp4 output.mp4
+python3 split_10sec.py -path input.mp4
+python3 split_10sec.py -path input.mp4 -out parts/ -duration 5
 ```
 
 ---
@@ -47,10 +31,10 @@ python3 cut_video.py input.mp4 output.mp4
 ## Requirements
 
 - Python 3.8+
-- FFmpeg (`brew install ffmpeg` on macOS)
+- FFmpeg (`brew install ffmpeg`)
 
 ---
 
 ## AI Prompt
 
-See [prompt.md](prompt.md) for the AI editing prompt used with video analysis tools.
+See [ai_prompt.md](ai_prompt.md) — use this prompt with Gemini/ChatGPT to generate intervals from video audio.
