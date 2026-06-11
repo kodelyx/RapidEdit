@@ -2,14 +2,6 @@
 
 AI-powered video editor — removes silence, pauses, and filler sounds for tight, clean cuts.
 
-## Demo
-
-### Video
-![Video Editing Demo](assets/demo_video.gif)
-
-### Image
-![Image Editing Demo](assets/demo_image.png)
-
 ---
 
 ## What it does
