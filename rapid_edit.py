@@ -2,6 +2,8 @@ import subprocess
 import json
 import sys
 import argparse
+import platform
+import functools
 from pathlib import Path
 
 BATCH_SIZE = 40
@@ -22,6 +24,17 @@ def load_intervals(config_path):
         sys.exit(1)
 
     return intervals
+
+
+@functools.lru_cache(maxsize=1)
+def check_nvenc_support():
+    """Verify if NVIDIA NVENC is supported by FFmpeg on this machine."""
+    try:
+        cmd = ["ffmpeg", "-y", "-f", "lavfi", "-i", "nullsrc=s=64x64:d=0.1", "-c:v", "h264_nvenc", "-f", "null", "-"]
+        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        return True
+    except Exception:
+        return False
 
 
 def process_batch(batch_idx, batch_intervals, input_file, total_batches, temp_dir):
@@ -49,16 +62,29 @@ def process_batch(batch_idx, batch_intervals, input_file, total_batches, temp_di
     )
 
     temp_ts_file = temp_dir / f"part_{batch_idx:04d}.ts"
+
+    # OS-specific GPU acceleration and encoding fallbacks
+    sys_type = platform.system().lower()
+    hwaccel_args = []
+    encoder_args = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "20"]
+
+    if sys_type == "darwin":
+        hwaccel_args = ["-hwaccel", "videotoolbox"]
+        encoder_args = ["-c:v", "h264_videotoolbox", "-b:v", "10M"]
+    elif check_nvenc_support():
+        hwaccel_args = ["-hwaccel", "cuda"]
+        encoder_args = ["-c:v", "h264_nvenc", "-b:v", "10M"]
+
     cmd = [
-        "ffmpeg", "-y",
+        "ffmpeg", "-y"
+    ] + hwaccel_args + [
         "-ss", f"{T_seek_start:.2f}",
         "-accurate_seek",
-        "-hwaccel", "videotoolbox",
         "-i", str(input_file),
         "-t", f"{T_end - T_seek_start:.2f}",
         "-filter_complex", filter_complex,
-        "-map", "[outv]", "-map", "[outa]",
-        "-c:v", "h264_videotoolbox", "-b:v", "10M",
+        "-map", "[outv]", "-map", "[outa]"
+    ] + encoder_args + [
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "192k",
         str(temp_ts_file)

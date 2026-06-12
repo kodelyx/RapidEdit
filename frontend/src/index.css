@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — RapidEdit Premium Green
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* ── Colors ── */
+  --bg-primary: #090b0f;         /* Deep rich dark-gray/black */
+  --bg-secondary: #0e131f;       /* Sidebar and header background */
+  --bg-card: #121824;            /* Card background */
+  --bg-card-hover: #182235;      /* Card hover */
+  --bg-elevated: #1e293b;        /* Elevated panels / active dropzone */
+  --bg-input: #080c14;           /* Input backgrounds */
+  
+  --border-primary: #1e293b;     /* Sleek dark border */
+  --border-secondary: #334155;   /* Medium border */
+  --border-accent: rgba(16, 185, 129, 0.45);
+  --border-glow: rgba(16, 185, 129, 0.2);
+  
+  --text-primary: #f8fafc;       /* Crisp off-white */
+  --text-secondary: #94a3b8;     /* Medium gray */
+  --text-muted: #64748b;         /* Dimmest gray */
+  --text-accent: #10b981;        /* Vibrant emerald accent */
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --gradient-accent: linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #2dd4bf 100%);
+  --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%);
+  --gradient-danger: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+  --gradient-glass: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(52, 211, 153, 0.04) 100%);
+  --gradient-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.15), transparent);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 30px rgba(16, 185, 129, 0.12);
+  --shadow-glow-intense: 0 0 50px rgba(16, 185, 129, 0.22);
+  
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-spring: 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Mesh gradient background overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: 
+    radial-gradient(ellipse 60% 40% at 15% 10%, rgba(16, 185, 129, 0.06), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 85% 20%, rgba(52, 211, 153, 0.04), transparent 55%),
+    radial-gradient(ellipse 40% 50% at 50% 80%, rgba(13, 148, 136, 0.03), transparent 50%);
+  z-index: 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Selection */
+::selection {
+  background: rgba(16, 185, 129, 0.3);
+  color: #fff;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f1f4f2;
+  --bg-secondary: #e6ebe7;
+  --bg-card: #fafbfb;
+  --bg-card-hover: #f1f4f2;
+  --bg-elevated: #dbe2de;
+  --bg-input: #fafbfb;
+  
+  --border-primary: #dbe2de;
+  --border-secondary: #ccd5d1;
+  --border-accent: rgba(16, 185, 129, 0.3);
+  --border-glow: rgba(16, 185, 129, 0.1);
+  
+  --text-primary: #0e1612;
+  --text-secondary: #394840;
+  --text-muted: #5a6e64;
+  --text-accent: #059669;
+  
+  --gradient-glass: linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, rgba(52, 211, 153, 0.01) 100%);
+  --gradient-mesh: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.06), transparent);
+  
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.04);
+}

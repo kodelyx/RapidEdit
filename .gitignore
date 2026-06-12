@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+.DS_Store
+*.pyc
+chatgpt-free-api/
+free-gemini-api/
+static/video/
+static/audio/
+output/
