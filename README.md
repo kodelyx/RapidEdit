@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" width="700" alt="RapidEdit" />
+  <img src="assets/banner_v2.png" width="700" alt="RapidEdit" />
 </p>
 
 <h1 align="center">⚡ RapidEdit</h1>
@@ -36,7 +36,7 @@ Manual editing takes **30+ minutes**. AI tools like Descript cost **$24/month**.
 ## ✨ How It Works
 
 <p align="center">
-  <img src="assets/workflow_v2.png" width="700" alt="Workflow" />
+  <img src="assets/workflow_v3.png" width="700" alt="Workflow" />
 </p>
 
 ```
@@ -57,7 +57,7 @@ cd RapidEdit
 
 ### 2. Get intervals from AI
 
-Upload your video to **Gemini** or **ChatGPT** with the prompt in [ai_prompt.md](ai_prompt.md).
+Upload your video to **Gemini** or **ChatGPT** with the prompt in [ai_prompt_final.md](ai_prompt_final.md).
 
 AI will give you timestamps → save as `intervals.json`:
 
@@ -120,7 +120,7 @@ python3 rapid_edit.py -path input.mp4 -out clean.mp4 -config intervals.json
 
 | Prompt | Use Case |
 |---|---|
-| [ai_prompt.md](ai_prompt.md) | Upload video to Gemini/ChatGPT → get silence detection intervals |
+| [ai_prompt_final.md](ai_prompt_final.md) | Upload video to Gemini/ChatGPT → get silence detection intervals |
 | [video_edit_prompt.md](video_edit_prompt.md) | Generate premium social media reel edits |
 
 ---
@@ -145,13 +145,13 @@ sudo apt install ffmpeg      # Linux
 RapidEdit/
 ├── rapid_edit.py           # Main cutting engine
 ├── split_10sec.py          # Video splitter
-├── ai_prompt.md            # AI prompt for interval detection
+├── ai_prompt_final.md      # AI prompt for interval detection
 ├── video_edit_prompt.md    # AI prompt for reel editing
 ├── config.json             # Example intervals config
 ├── guide.md                # Detailed usage guide
 └── assets/
-    ├── banner.png
-    └── workflow.png
+    ├── banner_v2.png
+    └── workflow_v3.png
 ```
 
 ---
